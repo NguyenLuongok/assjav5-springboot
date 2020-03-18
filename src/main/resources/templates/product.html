@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home :: w3layouts</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design" />
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+    function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/css/easy-responsive-tabs.css}" rel='stylesheet' type='text/css'/>
+    <!-- //for bootstrap working -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<th:block th:include="header"></th:block>
+<th:block th:include="banner"></th:block>
+<div class="container">
+    <div class="single-pro">
+        <div th:each="pr : ${listProduct}" class="col-md-3 product-men">
+            <div class="men-pro-item simpleCart_shelfItem">
+                <div class="men-thumb-item">
+                    <img th:src="@{/images/}+${pr.productImages}" alt="" class="pro-image-front">
+                    <img th:src="@{/images/}+${pr.productImages}" alt="" class="pro-image-back">
+                    <div class="men-cart-pro">
+                        <div class="inner-men-cart-pro">
+                            <a th:href="@{/product/}+${pr.productId}" class="link-product-add-cart">Quick View</a>
+                        </div>
+                    </div>
+                    <span class="product-new-top" th:text="'-'+${pr.productSale}+'%'"/>
+
+                </div>
+                <div class="item-info-product ">
+                    <h4 th:text="${pr.productName}"><a href="single.html"></a></h4>
+                    <div class="info-product-price">
+                        <del class="item_price" th:text="${#numbers.formatInteger(pr.productPrice,0,'COMMA')}+' VND'"/>
+                    </div>
+                    <div class="info-product-price"  th:with="salePrice= (${pr.productPrice} - (${pr.productPrice}/100) * ${pr.productSale})">
+
+                        <span th:text="${#numbers.formatInteger(salePrice,0,'COMMA')}+' VND'"/>
+                    </div>
+                    <div>
+                        <a class="hvr-outline-out button2" style="padding: 10px;font-weight: bold;color:aliceblue; "
+                           th:href="@{/cart/add/}+${pr.productId}">Add to cart</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<div style="width: 100%;margin: 30px 0px;">
+    <div class="clearfix"></div>
+</div>
+<th:block th:include="footer"></th:block>
+</body>
+</html>

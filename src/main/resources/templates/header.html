@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+</head>
+<body>
+<!-- header -->
+<th:block th:if="${session.myLogin==null}">
+    <div class="header" id="home">
+        <div class="container">
+            <ul>
+                <li> <a href="#" data-toggle="modal" data-target="#myModal"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Sign In </a></li>
+                <li> <a href="#" data-toggle="modal" data-target="#myModal2"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> Sign Up </a></li>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 0382941077</li>
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">luongndph07792@fpt.edu.vn</a></li>
+            </ul>
+        </div>
+    </div>
+</th:block>
+<th:block th:unless="${session.myLogin==null}">
+    <div class="header" id="home">
+        <div class="container">
+            <ul>
+                <li><i class="fa fa-phone" aria-hidden="true"></i> Call : 0382941077</li>
+                <li><i class="fa fa-envelope-o" aria-hidden="true"></i> <a href="mailto:info@example.com">luongndph07792@fpt.edu.vn</a></li>
+                <li><a style="padding: 7px;color:aliceblue; "  class="hvr-outline-out button2" th:href="@{/member/account}">Chào <h5 th:text="${session.myLogin.memberUser}"/></a></li>
+                <li><a style="padding: 7px;color:aliceblue; "  class="hvr-outline-out button2" th:href="@{/logout}"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Đăng xuất</a></li>
+            </ul>
+        </div>
+    </div>
+</th:block>
+<!-- header-bot -->
+<div class="header-bot">
+    <div class="header-bot_inner_wthreeinfo_header_mid">
+        <div class="col-md-4 header-middle">
+            <form action="#" method="post">
+                <input type="search" name="search" placeholder="Tìm kiếm ở đây..." required="">
+                <input type="submit" value=" ">
+                <div class="clearfix"></div>
+            </form>
+        </div>
+        <!-- header-bot -->
+        <div class="col-md-4 logo_agile">
+            <h1><a th:href="@{/}"><span>E</span>lite Shoppy <i class="fa fa-shopping-bag top_logo_agile_bag" aria-hidden="true"></i></a></h1>
+        </div>
+        <!-- header-bot -->
+        <div class="col-md-4 agileits-social top_content">
+            <ul class="social-nav model-3d-0 footer-social w3_agile_social">
+                <li class="share">Share On : </li>
+                <li><a href="#" class="facebook">
+                    <div class="front"><i class="fa fa-facebook" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-facebook" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="twitter">
+                    <div class="front"><i class="fa fa-twitter" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-twitter" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="instagram">
+                    <div class="front"><i class="fa fa-instagram" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-instagram" aria-hidden="true"></i></div></a></li>
+                <li><a href="#" class="pinterest">
+                    <div class="front"><i class="fa fa-linkedin" aria-hidden="true"></i></div>
+                    <div class="back"><i class="fa fa-linkedin" aria-hidden="true"></i></div></a></li>
+            </ul>
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //header-bot -->
+<!-- banner -->
+<div class="ban-top">
+    <div class="container">
+        <div class="top_nav_left">
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    </div>
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse menu--shylock" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav menu__list">
+                            <li class="active menu__item menu__item--current"><a class="menu__link" th:href="@{/}">Home<span class="sr-only">(current)</span></a></li>
+                            <li class="dropdown menu__item">
+                                <a th:href="@{/product}" class="dropdown-toggle menu__link" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Product <span class="caret"></span></a>
+                                <ul class="dropdown-menu multi-column columns-3">
+                                    <div class="agile_inner_drop_nav_info">
+                                        <div class="col-sm-3 multi-gd-img">
+                                            <ul th:each="ca : ${listCategory}" class="multi-column-dropdown">
+                                                <li><a th:href="@{/category/}+${ca.categoryId}" th:text="${ca.name}" />
+                                            </ul>
+                                        </div>
+                                        <div style="width: 66%;" class="col-sm-6 multi-gd-img multi-gd-text ">
+                                            <a th:href="@{/product}"><img src="/images/top2.jpg" alt=" "/></a>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="top_nav_right" style="margin-top: 15px;" >
+            <ul class="clearfix">
+                <li>
+                    <a class="hvr-outline-out button2" style="padding: 10px;font-weight: bold;color:aliceblue; " th:href="@{/cart/cart}"><i style="font-size: 28px;" class="fa fa-cart-arrow-down" aria-hidden="true"></i></a>
+                    <ul class="sub-menu">
+                        <div class="shopping-cart">
+
+                            <div class="shopping-cart-header">
+                                <i class="fa fa-shopping-cart cart-icon"></i><span class="badge" th:text="${session.myCartNum}"/>
+
+                                <div th:unless="${session.myCartTotal==0}" class="shopping-cart-total">
+                                    <span  class="lighter-text">Total:</span>
+                                    <span  class="main-color-text" th:text="${#numbers.formatInteger(session.myCartTotal,0,'COMMA')}+' VND'"/>
+                                </div>
+
+                            </div>
+
+                            <!--end shopping-cart-header -->
+                            <th:block th:if="${session.myLogin==null}">
+                                <ul class="shopping-cart-items" th:each="cart : ${session.myCartItems}">
+                                    <a th:href="@{/product/}+${cart.product.productId}">
+                                        <li class="clearfix" th:with="salePrice= (${cart.product.productPrice} - (${cart.product.productPrice}/100) * ${cart.product.productSale})">
+                                            <img width="50px" height="50px" th:src="@{/images/}+${cart.product.productImages}" alt="item1" />
+                                            <span class="item-name" th:text="${cart.product.productName}"/>
+                                            <span class="item-price" th:text="${#numbers.formatInteger(salePrice,0,'COMMA')}+' VND'"/>
+                                            <span class="item-quantity" th:text="'Quantity :'+ ${cart.quantity}"/>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </th:block>
+                            <th:block th:unless="${session.myLogin==null}">
+                                <ul class="shopping-cart-items" th:each="cart : ${session.myCartMembers}">
+                                    <a th:href="@{/product/}+${cart.product.productId}">
+                                        <li class="clearfix" th:with="salePrice= (${cart.product.productPrice} - (${cart.product.productPrice}/100) * ${cart.product.productSale})">
+                                            <img width="50px" height="50px" th:src="@{/images/}+${cart.product.productImages}" alt="item1" />
+                                            <span class="item-name" th:text="${cart.product.productName}"/>
+                                            <span class="item-price" th:text="${#numbers.formatInteger(salePrice,0,'COMMA')}+' VND'"/>
+                                            <span class="item-quantity" th:text="'Quantity :'+ ${cart.quantity}"/>
+                                        </li>
+                                    </a>
+                                </ul>
+                            </th:block>
+                            <div th:if="${session.myCartTotal==0}">
+                                <span>Không có gì trong giỏ hàng</span>
+                            </div>
+                            <div th:unless="${session.myCartTotal==0}">
+                                <a th:href="@{/cart/checkout}" class="buttonn">Checkout</a>
+                            </div>
+                        </div>
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+        <div class="clearfix"></div>
+    </div>
+</div>
+<!-- //banner-top -->
+<!-- Modal1 -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modal-body-sub_agile">
+                <div class="col-md-8 modal_body_left modal_body_left1">
+                    <h3 class="agileinfo_sign">Sign In <span>Now</span></h3>
+                    <form action="#" th:action="@{/login-member}" th:object="${member}" method="post">
+                        <div class="styled-input agile-styled-input-top">
+                            <input type="text" th:field="*{memberUser}" name="Name" required="">
+                            <label>Email</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input type="password" th:field="*{memberPassword}" required="">
+                            <label>Password</label>
+                            <span></span>
+                        </div>
+                        <input type="submit" value="Sign In">
+                    </form>
+                    <div class="clearfix"></div>
+                    <p><a href="#" data-toggle="modal" data-target="#myModal2" > Don't have an account?</a></p>
+
+                </div>
+                <div class="col-md-4 modal_body_right modal_body_right1">
+                    <img src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.15752-9/90068331_227389898635630_974053541410766848_n.jpg?_nc_cat=110&_nc_sid=b96e70&_nc_ohc=WLvWF0nUT0kAX_gLvON&_nc_ht=scontent-sin6-2.xx&oh=fb2ccdf89c0ead8c4330b35bc655028b&oe=5E959A03" alt=" "/>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- //Modal content-->
+    </div>
+</div>
+<!-- //Modal1 -->
+<!-- Modal2 -->
+<div class="modal fade" id="myModal2" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body modal-body-sub_agile">
+                <div class="col-md-8 modal_body_left modal_body_left1">
+                    <h3 class="agileinfo_sign">Sign Up <span>Now</span></h3>
+                    <form th:action="@{/sign-up}" th:object="${member}" method="post">
+                        <div class="styled-input agile-styled-input-top">
+                            <input type="text" name="Name" th:field="*{memberUser}" required="">
+                            <label>Name</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input type="password" th:field="*{memberPassword}" name="password" required="">
+                            <label>Password</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input type="email" th:field="*{memberEmail}" name="Email" required="">
+                            <label>Email</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input type="text" th:field="*{membersPhone}" required="">
+                            <label>Phone</label>
+                            <span></span>
+                        </div>
+                        <div class="styled-input">
+                            <input type="text" th:field="*{memberAddress}" required="">
+                            <label>Address</label>
+                            <span></span>
+                        </div>
+                        <input type="submit" value="Sign Up">
+                    </form>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="col-md-4 modal_body_right modal_body_right1">
+                    <img src="https://scontent-sin6-2.xx.fbcdn.net/v/t1.15752-9/90068331_227389898635630_974053541410766848_n.jpg?_nc_cat=110&_nc_sid=b96e70&_nc_ohc=WLvWF0nUT0kAX_gLvON&_nc_ht=scontent-sin6-2.xx&oh=fb2ccdf89c0ead8c4330b35bc655028b&oe=5E959A03" alt=" "/>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- //Modal content-->
+    </div>
+</div>
+<!-- //Modal2 -->
+
+</body>
+</html>

@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:tiles="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Elite Shoppy an Ecommerce Online Shopping Category Flat Bootstrap Responsive Website Template | Home ::
+        w3layouts</title>
+    <!--/tags -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="keywords" content="Elite Shoppy Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, SonyEricsson, Motorola web design"/>
+    <script type="application/x-javascript"> addEventListener("load", function () {
+        setTimeout(hideURLbar, 0);
+    }, false);
+
+    function hideURLbar() {
+        window.scrollTo(0, 1);
+    } </script>
+    <!--//tags -->
+    <link th:href="@{/css/bootstrap.css}" rel="stylesheet" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" media="all" />
+    <link th:href="@{/css/easy-responsive-tabs.css}" rel='stylesheet' type='text/css'/>
+    <!-- //for bootstrap working -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic'
+          rel='stylesheet' type='text/css'>
+</head>
+<style>
+    .line-heightt{
+        line-height: 115px;
+    }
+</style>
+<body>
+<th:block th:include="header"></th:block>
+
+<div class="container">
+    <h2 class="text-center" style="margin: 50px 0px;font-weight: bold;">Giỏ hàng của bạn</h2>
+
+    <table id="cart" class="table table-hover table-condensed">
+        <thead th:unless="${session.myCartTotal==0}">
+        <tr>
+            <th class="text-center" style="width:30%">Tên sản phẩm</th>
+            <th style="width:20%">Giá</th>
+            <th style="width:10%">Số lượng</th>
+            <th style="width:30%" class="text-center">Thành tiền</th>
+            <th style="width:15%" class="text-center">Cập nhật</th>
+            <th style="width:10%" class="text-center">Xóa</th>
+        </tr>
+        </thead>
+        <thead th:if="${session.myCartTotal==0}">
+        <h2 style="display: block; text-align: center">Không có gì trong giỏ hàng</h2>
+        <i style="text-align: center;font-size: 90px;display: block;" class="fa fa-shopping-cart"></i>
+        </thead>
+        <thead th:if="${session.myCartMembers==0}">
+        <h2 style="display: block; text-align: center">Không có gì trong giỏ hàng</h2>
+        <i style="text-align: center;font-size: 90px;display: block;" class="fa fa-shopping-cart"></i>
+        </thead>
+        <tbody>
+        <th:block th:if="${session.myLogin==null}">
+            <tr th:each="cart : ${session.myCartItems}">
+                <form action="#" th:action="@{/cart/update/{productId}(productId= ${cart.product.productId})}" method="get">
+
+                    <td data-th="Product">
+                        <div class="row">
+                            <a style="color: #555555" th:href="@{/product/}+${cart.product.productId}">
+                                <div class="col-sm-5 hidden-xs">
+                                    <img th:src="@{/images/}+${cart.product.productImages}"  class="img-responsive">
+                                </div>
+                                <div class="col-sm-7">
+                                    <h5 class="nomargin line-heightt" th:text="${cart.product.productName}"></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                    <div  th:with="salePrice= (${cart.product.productPrice} - (${cart.product.productPrice}/100) * ${cart.product.productSale}) ">
+                        <td data-th="Price" style="line-height: 115px" th:text="${#numbers.formatInteger(salePrice,0,'COMMA')}+' VND'"></td>
+                        <td data-th="Quantity"><input style="margin-top: 40px" class="form-control text-center" name="total" th:min="1" th:max="${cart.product.productTotal}" th:value="${cart.quantity}"
+                                                      type="number">
+                        </td>
+                        <td th:with="priceTotal= ${salePrice * cart.quantity}" data-th="Subtotal" class="text-center" style="line-height: 115px" th:text="${#numbers.formatInteger(priceTotal,0,'COMMA')}+' VND'"></td>
+                    </div>
+                    <td data-th="">
+                        <button type="submit" class="button line-heightt" style="border: none;width: 100%;background:none;"><i style="font-size: 25px" class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td data-th="">
+                        <a class="button" th:href="@{/cart/remove/}+${cart.product.productId}"><i style="font-size: 25px;color: #555555" class="fa fa-trash-o line-heightt"></i></a>
+                    </td>
+                </form>
+            </tr>
+        </th:block>
+        <th:block th:unless="${session.myLogin==null}">
+            <tr th:each="cart : ${session.myCartMembers}">
+                <form action="#" th:action="@{/cart/update/{productId}(productId= ${cart.product.productId})}" method="get">
+
+                    <td data-th="Product">
+                        <div class="row">
+                            <a style="color: #555555" th:href="@{/product/}+${cart.product.productId}">
+                                <div class="col-sm-5 hidden-xs">
+                                    <img th:src="@{/images/}+${cart.product.productImages}"  class="img-responsive">
+                                </div>
+                                <div class="col-sm-7">
+                                    <h5 class="nomargin line-heightt" th:text="${cart.product.productName}"></h5>
+                                </div>
+                            </a>
+                        </div>
+                    </td>
+                    <div  th:with="salePrice= (${cart.product.productPrice} - (${cart.product.productPrice}/100) * ${cart.product.productSale}) ">
+                        <td data-th="Price" style="line-height: 115px" th:text="${#numbers.formatInteger(salePrice,0,'COMMA')}+' VND'"></td>
+                        <td data-th="Quantity"><input style="margin-top: 40px" class="form-control text-center" name="total" th:min="1" th:max="${cart.product.productTotal}" th:value="${cart.quantity}"
+                                                      type="number">
+                        </td>
+                        <td th:with="priceTotal= ${salePrice * cart.quantity}" data-th="Subtotal" class="text-center" style="line-height: 115px" th:text="${#numbers.formatInteger(priceTotal,0,'COMMA')}+' VND'"></td>
+                    </div>
+                    <td data-th="">
+                        <button type="submit" class="button line-heightt" style="border: none;width: 100%;background:none;"><i style="font-size: 25px" class="fa fa-edit"></i>
+                        </button>
+                    </td>
+                    <td data-th="">
+                        <a class="button" th:href="@{/cart/remove/}+${cart.product.productId}"><i style="font-size: 25px;color: #555555" class="fa fa-trash-o line-heightt"></i></a>
+                    </td>
+                </form>
+            </tr>
+        </th:block>
+        </tbody>
+        <tfoot>
+        <tr>
+            <td><a th:href="@{/}" class="btn btn-warning"><b><i class="fa fa-angle-left"></i> Tiếp tục mua hàng</b></a>
+            </td>
+            <td colspan="2" class="hidden-xs"></td>
+            <td class="hidden-xs text-center" th:unless="${session.myCartTotal==0}"><strong>Tổng tiền <span th:text="${#numbers.formatInteger(session.myCartTotal,0,'COMMA')}+' VND'"></span></strong>
+            </td>
+            <td class="checkOrder" th:unless="${session.myCartTotal==0}">
+                <a th:href="@{/cart/checkout}" class="btn btn-success btn-block"><b>Thanh toán <i class="fa fa-angle-right"></i></b></a>
+            </td>
+        </tr>
+        </tfoot>
+    </table>
+</div>
+<th:block th:include="footer"></th:block>
+</body>
+</html>

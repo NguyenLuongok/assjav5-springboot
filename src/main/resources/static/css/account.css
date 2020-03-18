@@ -1,0 +1,95 @@
+.clear-li{
+    list-style: none;
+}
+.inf{
+    padding: 30px 0px;
+    width: 100%;
+}
+.account_left {
+    margin-bottom: 20px;
+    margin-top: 0;
+}
+.user_box .title-detail {
+    color: #f72b3f;
+    padding-bottom: 10px;
+    font-size: 18px;
+    margin-bottom: 10px !important;
+    border-bottom: 1px solid #ebebeb;
+}
+.user_box .title-detail span {
+    background: #2fdab8;
+    color: #fff;
+}
+.user_box p{
+    margin-bottom: 10px;
+    line-height: 24px;
+}
+.user_box .title-detail span a {
+    display: inline-block;
+    padding: 0 10px;
+    color: #fff;
+    height: 35px;
+    line-height: 35px;
+    font-size: 14px;
+}
+.pull-right {
+    float: right;
+}
+.pull-right {
+    float: right!important;
+}
+.account_left ul li a i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+.account_left h2 {
+    margin-bottom: 10px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+    text-align: left;
+    position: relative;
+    border-bottom: none;
+    padding-bottom: 10px;
+}
+h2 {
+    font-size: 20px;
+}
+.account_left ul li.current a {
+    color: #2fdab8;
+}
+.account_left ul li a i {
+    margin-right: 5px;
+    font-size: 18px;
+}
+.account_left ul li a {
+    padding: 0 0 15px 0;
+    display: block;
+    color: #000;
+}
+#layout_account.layout_account_address .user_box {
+    width: 100%;
+}
+#layout_account .user_box .large_form {
+    position: relative;
+    display: table;
+    width: 100%;
+}
+#layout_account .user_box {
+    max-width: 100%;
+    width: 335px;
+    padding: 15px;
+    border: 1px solid #eee;
+    background-color: #fff;
+    -moz-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    -webkit-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 20px auto 0px;
+}
+.m-b-15 {
+    margin-bottom: 15px;
+}
+#layout_account.layout_account_address .user_box input {
+    font-size: 13px;
+}
